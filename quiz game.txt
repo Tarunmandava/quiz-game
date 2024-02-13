@@ -1,0 +1,64 @@
+def display_question(question, options):
+    """Display a question and its multiple-choice options."""
+    print(question)
+    for i, option in enumerate(options, start=1):
+        print(f"{i}. {option}")
+    print()
+
+
+def get_user_answer():
+    """Get and validate user input for the answer."""
+    while True:
+        user_input = input("Enter your answer (1, 2, 3, or 4): ")
+        if user_input.isdigit() and 1 <= int(user_input) <= 4:
+            return int(user_input)
+        else:
+            print("Invalid input. Please enter a number between 1 and 4.")
+
+
+def evaluate_answer(user_answer, correct_answer, score):
+    """Evaluate the user's answer and update the score."""
+    if user_answer == correct_answer:
+        print("Correct!")
+        return score + 1
+    else:
+        print("Incorrect! The correct answer was:", correct_answer)
+        return score
+
+
+def quiz():
+    """Main function to run the quiz."""
+    questions = [
+        {
+            "question": "What is the capital of France?",
+            "options": ["Paris", "London", "Berlin", "Rome"],
+            "correct_answer": 1,
+        },
+        {
+            "question": "What is the largest planet in our solar system?",
+            "options": ["Mars", "Jupiter", "Venus", "Saturn"],
+            "correct_answer": 2,
+        },
+        {
+            "question": "Who wrote 'Romeo and Juliet'?",
+            "options": ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
+            "correct_answer": 2,
+        },
+    ]
+
+    score = 0
+
+    print("Welcome to the Quiz Game!")
+    print("Answer the following questions:")
+
+    for question_data in questions:
+        display_question(question_data["question"], question_data["options"])
+        user_answer = get_user_answer()
+        score = evaluate_answer(user_answer, question_data["correct_answer"], score)
+
+    print("Quiz Complete!")
+    print("Your final score is:", score)
+
+
+if __name__ == "__main__":
+    quiz()
